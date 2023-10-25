@@ -12,12 +12,7 @@ ENV REAL_IP_HEADER 1
 # Laravel config
 ENV APP_ENV production
 ENV APP_DEBUG false
-ENV DB_CONNECTION mysql
-ENV DB_HOST monorail.proxy.rlwy.net
-ENV DB_PORT 51078
-ENV DB_DATABASE railway
-ENV DB_USERNAME root
-ENV DB_PASSWORD 7rgy@f06@3qd89kcslxlwjqbggky_$83
+
 
 # Allow composer to run as root
 ENV COMPOSER_ALLOW_SUPERUSER 1
