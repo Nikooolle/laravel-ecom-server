@@ -2,30 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Concern;
 use Illuminate\Http\Request;
-use App\Models\Category;
 
-class CategoryController extends Controller
+class ConcernController extends Controller
 {
-
     public function index(){
-        $data = Category::all();
+        $data = Concern::all();
 
         return response([
             'data' => $data,
-            'message' => "View all the Records"
-        ],200);
+            'message' => "View all the Concerns"
+        ]);
     }
 
     public function show($id){
-        $data = Category::find($id);
+        $data = Concern::find($id);
         if(!$data) {
-            return response()->json(['error'=>'Record not found'], 401);
+            return response()->json(['error'=>'Concern not found'], 401);
         }
 
         return response([
             'date' => $data,
-            'message' => "Record Found Successfully"
+            'message' => "Concern Found Successfully"
         ]);
     }
 
@@ -34,20 +33,20 @@ class CategoryController extends Controller
             'name' => ['required', 'string'],
         ]);
 
-        $data = Category::create([
+        $data = Concern::create([
             'name' => $request->name
         ]);
 
         return response([
             'data' => $data,
-            'message' => "Successfully created category"
+            'message' => "Successfully created concern"
         ]);
     }
 
     public function update(Request $request, $id){
-        $data = Category::find($id);
+        $data = Concern::find($id);
         if (!$data) {
-            return response()->json(['error'=>'Record Not Found'], 401);
+            return response()->json(['error'=>'Concern Not Found'], 401);
         }
 
         $request->validate([
@@ -61,19 +60,19 @@ class CategoryController extends Controller
 
         return response([
             'data' => $data,
-            'message' => "Record Updated Successfully",
+            'message' => "Concern Updated Successfully",
         ]);
 
     }
 
     public function destroy($id){
-        $data = Category::find($id);
+        $data = Concern::find($id);
         if (!$data) {
-            return response()->json(['error'=>'Record Not Found'], 401);
+            return response()->json(['error'=>'Concern Not Found'], 401);
         }
         $data->delete();
         return response([
-            'message' => "Category Deleted Successfully"
+            'message' => "Concerns Deleted Successfully"
         ]);
     }
 }

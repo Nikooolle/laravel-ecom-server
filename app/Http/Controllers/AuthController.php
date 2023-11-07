@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -61,6 +62,13 @@ class AuthController extends Controller
         return response([
             'message'=>"Logged out successfully",
         ], 201);
+    }
+
+    public function authUser() {
+        return response([
+            'user' => Auth::user(),
+            'message'=>"Auth User Logged in",
+        ], 200);
     }
 
 }

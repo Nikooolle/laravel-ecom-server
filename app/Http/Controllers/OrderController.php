@@ -11,7 +11,7 @@ class OrderController extends Controller
 {
     public function index(Request $request){
 
-        $data = Order::with('orderItems')->where('user_id', $request->user_id)->get();
+        $data = Order::with('orderItems','user')->where('user_id', auth()->user()->id)->get();
         return response([
             'data' => $data,
             'message' => "View all the Products"
@@ -20,19 +20,18 @@ class OrderController extends Controller
 
     public function store(Request $request){
         $request->validate([
-            'user_id' => ['required'],
             'status' => ['required'],
             'payment_type' => ['required'],
 
         ]);
 
-        $carts = Cart::where('user_id', $request->user_id)->get();
+        $carts = Cart::where('user_id',auth()->user()->id)->get();
 
         $data = Order::create([
-            'user_id' => $request->user_id,
+            'user_id' => auth()->user()->id,
             'quantity' => $carts->sum('quantity') ,
             'total' => $carts->sum('total_price'),
-            'status' => $request->status,
+            'status' => auth()->user()->usertype == 'admin' ? $request->status : 'Pending',
             'payment_type' => $request->payment_type,
         ]);
 
@@ -46,7 +45,7 @@ class OrderController extends Controller
             ]);
         }
 
-        Cart::where('user_id', $request->user_id)->delete();
+        Cart::where('user_id',auth()->user()->id)->delete();
 
         return response([
             'data' => $data,

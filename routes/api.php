@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ConcernController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,16 +20,20 @@ use App\Http\Controllers\AuthController;
 |
 */
 
+
 //Public routes
-Route::get("/products", [ProductController::class,
-'index']);
+Route::get("/products", [ProductController::class,'index']);
 Route::get("/products/{id}", [ProductController::class, 'show']);
 Route::get("/products/search/{name}", [ProductController::class, 'search']);
 Route:: post("/register", [AuthController::class, 'register']);
 Route:: post("/login", [AuthController::class, 'login']);
+Route::get("/category", [CategoryController::class, 'index']); //all record
+Route::get("/concerns", [ConcernController::class, 'index']); //all record
 
 Route::group(['middleware' => ['auth:sanctum']], function(){
-    Route:: post("/logout", [AuthController::class, 'logout']);
+    Route::post("/logout", [AuthController::class, 'logout']);
+    Route::get("/authUser", [AuthController::class, 'authUser']);
+    Route::get("/carts", [CartController::class,'index']);
     Route::put('/orders/{id}', [OrderController::class, 'updateStatus']);
 });
 
@@ -53,18 +58,18 @@ Route::group(['middleware' => ['auth:sanctum', 'role:user']], function(){
 //Admin Routes
 //Protected routes
 Route::group(['middleware' => ['auth:sanctum', 'role:admin']], function(){
-    // Route::get("/products", [ProductController::class, 'index']); //all record
-    // Route::get("/products/{id}", [ProductController::class, 'show']);
     Route::post("/products", [ProductController::class, 'store']);
     Route::put("/products/{id}", [ProductController::class, 'update']);
     Route::delete("/products/{id}", [ProductController::class, 'destroy']);
 
-});
-//Category
-Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::post("/category", [CategoryController::class, 'store']);
-    Route::get("/category", [CategoryController::class, 'index']); //all record
     Route::get("/category/{id}", [CategoryController::class, 'show']); //specific record
     Route::put("/category/{id}", [CategoryController::class, 'update']);
     Route::delete("/category/{id}", [CategoryController::class, 'destroy']);
+
+    Route::post("/concerns", [ConcernController::class, 'store']);
+    Route::get("/concerns/{id}", [ConcernController::class, 'show']); //specific record
+    Route::put("/concerns/{id}", [ConcernController::class, 'update']);
+    Route::delete("/concerns/{id}", [ConcernController::class, 'destroy']);
 });
+

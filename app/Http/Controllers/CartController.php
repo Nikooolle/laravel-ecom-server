@@ -8,10 +8,21 @@ use App\Models\Product;
 
 class CartController extends Controller
 {
+
+    public function index(){
+        $data = Cart::with('product.concern', 'product.category')->where('user_id',auth()->user()->id)->get();
+
+        return response([
+            'data' => $data,
+            'message' => "My Carts"
+        ],200);
+    }
+
+
+
     public function store(Request $request){
         $request->validate([
             'product_id' => ['required'],
-            'user_id' => ['required'],
             'quantity' => ['required', 'numeric'],
 
         ]);
@@ -20,7 +31,7 @@ class CartController extends Controller
 
         $data = Cart::create([
             'product_id' => $request->product_id,
-            'user_id'=> $request->user_id,
+            'user_id'=> auth()->user()->id,
             'quantity' => $request->quantity,
             'price' => $product->price,
             'total_price' => $request->quantity * $product->price
@@ -39,7 +50,7 @@ class CartController extends Controller
         }
 
         $request->validate([
-            'quantity' => ['required', 'numeric'],
+            'quantity' => ['required', 'numeric', 'gt:0'],
 
         ]);
 
