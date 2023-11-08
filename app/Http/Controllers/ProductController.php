@@ -11,10 +11,17 @@ class ProductController extends Controller
     public function index(Request $request){
 
         $categoryId = $request->category_id;
-        $data = Product::with('category')
+        $concernId = $request->concern_id;
+        $orderBy = $request->orderBy;
+        $sortBy = $request->sortBy;
+        $data = Product::with('category','concern')
         ->when($categoryId, function ($query, $categoryId) {
-            $query->where('category_id', $categoryId);
+            $query->whereIn('category_id', $categoryId);
         })
+        ->when($concernId, function ($query, $concernId) {
+            $query->whereIn('concern_id', $concernId);
+        })
+        ->orderBy($sortBy,$orderBy)
         ->get();
         return response([
             'data' => $data,
