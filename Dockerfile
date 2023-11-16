@@ -19,7 +19,7 @@ ENV DB_HOST monorail.proxy.rlwy.net
 ENV DB_PORT 51078
 ENV DB_DATABASE railway
 ENV DB_USERNAME root
-ENV DB_PASSWORD 7rgy@f06@3qd89kcslxlwjqbggky_$83
+ENV DB_PASSWORD "7rgy@f06@3qd89kcslxlwjqbggky_$83"
 
 
 # Allow composer to run as root
