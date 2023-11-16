@@ -27,6 +27,8 @@ ENV DB_PORT 3306
 ENV DB_DATABASE ecom-server
 ENV DB_USERNAME piff8y6s0x8thppa0qe0
 ENV DB_PASSWORD pscale_pw_T51LV1MgxgQDF5gXE1aNrB0Nl6Lnrk41zAmZbT7jZZm
+# ENV MYSQL_ATTR_SSL_CA /var/www/html/public/socmed-server/cacert-2023-08-22.pem
+ENV MYSQL_ATTR_SSL_CA /ect/secrets/cacert-2023-08-22.pem
 
 # Allow composer to run as root
 ENV COMPOSER_ALLOW_SUPERUSER 1
