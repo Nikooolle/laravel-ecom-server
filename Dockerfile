@@ -14,13 +14,12 @@ ENV APP_KEY base64:rwcuql2CSQ3LhPZNdTePWTJRmQj9QL6I0kmpTpdNGxU=
 ENV APP_ENV production
 ENV APP_DEBUG true
 
-ENV DB_CONNECTION mysql
-ENV DB_HOST monorail.proxy.rlwy.net
-ENV DB_PORT 51078
-ENV DB_DATABASE railway
+ENV DB_CONNECTION pgsql
+ENV DB_HOST dpg-clb3skunt67s73f8ll5g-a
+ENV DB_PORT 5432
+ENV DB_DATABASE ecom_server
 ENV DB_USERNAME root
-ENV DB_PASSWORD "7rgy@f06@3qd89kcslxlwjqbggky_$83"
-
+ENV DB_PASSWORD 2NpFHxqNJBL4YmEeP8K0qEFT8r1Tfyh8
 
 # Allow composer to run as root
 ENV COMPOSER_ALLOW_SUPERUSER 1
