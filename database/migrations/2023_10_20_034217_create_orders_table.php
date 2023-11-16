@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("user_id")->index();
+            $table->unsignedBigInteger("user_id");
             $table->integer("quantity");
             $table->decimal("total");
             $table->enum("status", ["Pending", "For Packaging", "Out for Delivery", "Delivered", "Cancelled"]);
