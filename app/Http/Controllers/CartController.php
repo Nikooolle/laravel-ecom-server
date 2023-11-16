@@ -14,6 +14,7 @@ class CartController extends Controller
 
         return response([
             'data' => $data,
+            'total_cart' => $data->sum('total_price'),
             'message' => "My Carts"
         ],200);
     }
@@ -39,7 +40,7 @@ class CartController extends Controller
 
         return response([
             'data' => $data,
-            'message' => "Successfully created cart"
+            'message' => "Added to cart"
         ]);
     }
 
@@ -76,7 +77,7 @@ class CartController extends Controller
         }
         $data->delete();
         return response([
-            'message' => "Product Deleted Successfully"
+            'message' => "Product Removed Successfully!"
         ]);
     }
 }

@@ -14,7 +14,13 @@ class Order extends Model
         'quantity',
         'total',
         'status',
-        'payment_type'
+        'payment_type',
+        'first_name',
+        'last_name',
+        'address_1',
+        'address_2',
+        'city',
+        'zip_code'
     ];
 
     public function orderItems() {

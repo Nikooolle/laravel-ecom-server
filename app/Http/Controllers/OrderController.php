@@ -11,7 +11,7 @@ class OrderController extends Controller
 {
     public function index(Request $request){
 
-        $data = Order::with('orderItems','user')->where('user_id', auth()->user()->id)->get();
+        $data = Order::with('orderItems.product','user' )->where('user_id', auth()->user()->id)->get();
         return response([
             'data' => $data,
             'message' => "View all the Products"
@@ -20,8 +20,14 @@ class OrderController extends Controller
 
     public function store(Request $request){
         $request->validate([
-            'status' => ['required'],
+
             'payment_type' => ['required'],
+            'first_name' => ['required'],
+            'last_name' => ['required'],
+            'address_1' => ['required'],
+            'address_2' => ['required'],
+            'city' => ['required'],
+            'zip_code' => ['required']
 
         ]);
 
@@ -33,6 +39,12 @@ class OrderController extends Controller
             'total' => $carts->sum('total_price'),
             'status' => auth()->user()->usertype == 'admin' ? $request->status : 'Pending',
             'payment_type' => $request->payment_type,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'address_1' => $request->address_1,
+            'address_2' => $request->address_2,
+            'city' => $request->city,
+            'zip_code' => $request->zip_code
         ]);
 
         foreach($carts as $cart){
@@ -49,7 +61,7 @@ class OrderController extends Controller
 
         return response([
             'data' => $data,
-            'message' => "Successfully created order"
+            'message' => "Successfully Ordered!"
         ]);
     }
 

@@ -12,8 +12,8 @@ class ProductController extends Controller
 
         $categoryId = $request->category_id;
         $concernId = $request->concern_id;
-        $orderBy = $request->orderBy;
-        $sortBy = $request->sortBy;
+        $orderBy = $request->orderBy ?? 'asc';
+        $sortBy = $request->sortBy ?? 'id';
         $data = Product::with('category','concern')
         ->when($categoryId, function ($query, $categoryId) {
             $query->whereIn('category_id', $categoryId);
@@ -36,7 +36,7 @@ class ProductController extends Controller
         }
 
         return response([
-            'date' => $data,
+            'data' => $data,
             'message' => "Record Found Successfully"
         ]);
     }
@@ -53,11 +53,17 @@ class ProductController extends Controller
 
         $data = Product::create([
             'name' => $request->name,
+            'main_description' => $request->main_description,
+            'target' => $request->target,
+            'suited' => $request->suited,
+            'format' => $request->format,
+            'ingredients' => $request->ingredients,
             'description'=> $request->description,
             'price' => $request->price,
             'quantity' => $request->quantity,
             'image' => $request->image,
-            'category_id' => $request->category_id
+            'category_id' => $request->category_id,
+            'concern_id' => $request->concern_id
         ]);
 
         return response([

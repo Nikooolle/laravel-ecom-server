@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger("user_id")->index();
             $table->integer("quantity");
             $table->decimal("total");
-            $table->enum("status", ["Pending", "For Packaging", "Out for Delivery", "Cancelled"]);
-            $table->enum("payment_type", ["Debit/Credit Card", "Cash on Delivery"]);
+            $table->enum("status", ["Pending", "For Packaging", "Out for Delivery", "Delivered", "Cancelled"]);
+            $table->enum("payment_type", ["Paypal","GCash","PayMaya", "Cash On Delivery"]);
             $table->timestamps();
         });
     }
