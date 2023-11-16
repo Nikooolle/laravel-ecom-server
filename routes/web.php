@@ -24,3 +24,6 @@ Route::get('/test-database', function () {
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/test/env', function () {
+    dd(env('DB_DATABASE')); // Dump 'db' variable value one by one
+});
