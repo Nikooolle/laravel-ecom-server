@@ -52,6 +52,8 @@ Route::group(['middleware' => ['auth:sanctum', 'role:admin']], function(){
     Route::put("/products/{id}", [ProductController::class, 'update']);
     Route::delete("/products/{id}", [ProductController::class, 'destroy']);
 
+    Route::get("/all_orders", [OrderController::class, 'allOrder']); //all record
+
     Route::post("/category", [CategoryController::class, 'store']);
     Route::get("/category/{id}", [CategoryController::class, 'show']); //specific record
     Route::put("/category/{id}", [CategoryController::class, 'update']);

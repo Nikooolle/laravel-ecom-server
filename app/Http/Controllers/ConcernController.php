@@ -40,7 +40,7 @@ class ConcernController extends Controller
         return response([
             'data' => $data,
             'message' => "Successfully created concern"
-        ]);
+        ], 202);
     }
 
     public function update(Request $request, $id){
@@ -61,7 +61,7 @@ class ConcernController extends Controller
         return response([
             'data' => $data,
             'message' => "Concern Updated Successfully",
-        ]);
+        ], 202);
 
     }
 

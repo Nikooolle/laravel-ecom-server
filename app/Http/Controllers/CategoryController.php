@@ -41,7 +41,7 @@ class CategoryController extends Controller
         return response([
             'data' => $data,
             'message' => "Successfully created category"
-        ]);
+        ], 202);
     }
 
     public function update(Request $request, $id){
@@ -62,7 +62,7 @@ class CategoryController extends Controller
         return response([
             'data' => $data,
             'message' => "Record Updated Successfully",
-        ]);
+        ], 202);
 
     }
 

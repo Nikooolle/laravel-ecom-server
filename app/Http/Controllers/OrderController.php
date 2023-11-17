@@ -17,6 +17,14 @@ class OrderController extends Controller
             'message' => "View all the Products"
         ]);
     }
+    public function allOrder(Request $request){
+
+        $data = Order::with('orderItems.product','user')->get();
+        return response([
+            'data' => $data,
+            'message' => "View all the Products"
+        ]);
+    }
 
     public function store(Request $request){
         $request->validate([
