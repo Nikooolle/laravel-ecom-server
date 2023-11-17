@@ -8,6 +8,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ConcernController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,20 +36,9 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::get("/authUser", [AuthController::class, 'authUser']);
     Route::get("/carts", [CartController::class,'index']);
     Route::put('/orders/{id}', [OrderController::class, 'updateStatus']);
-});
-
-
-//User Route
-
-//Cart
-Route::group(['middleware' => ['auth:sanctum', 'role:user']], function(){
     Route::post("/carts", [CartController::class, 'store']);
     Route::delete("/carts/{id}", [CartController::class, 'destroy']);
     Route::put("/carts/{id}", [CartController::class, 'update']);
-});
-
-//Order
-Route::group(['middleware' => ['auth:sanctum', 'role:user']], function(){
     Route::post("/orders", [OrderController::class, 'store']);
     Route::get("/orders", [OrderController::class, 'index']); //all record
 });
@@ -71,5 +61,7 @@ Route::group(['middleware' => ['auth:sanctum', 'role:admin']], function(){
     Route::get("/concerns/{id}", [ConcernController::class, 'show']); //specific record
     Route::put("/concerns/{id}", [ConcernController::class, 'update']);
     Route::delete("/concerns/{id}", [ConcernController::class, 'destroy']);
+
+    Route::get("/dashboard", [DashboardController::class, 'index']); //Dashboard
 });
 
