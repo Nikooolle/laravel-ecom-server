@@ -19,7 +19,7 @@ class OrderController extends Controller
     }
     public function allOrder(Request $request){
 
-        $data = Order::with('orderItems.product','user')->get();
+        $data = Order::with('orderItems.product','user')->latest()->get();
         return response([
             'data' => $data,
             'message' => "View all the Products"
