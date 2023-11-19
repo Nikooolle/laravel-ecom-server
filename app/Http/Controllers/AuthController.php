@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
     public function index(){
-        $data = User::all();
+        $data = User::where('usertype','user')->get();
 
         return response([
             'data' => $data,
