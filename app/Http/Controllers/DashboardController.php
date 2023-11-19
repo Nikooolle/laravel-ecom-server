@@ -11,7 +11,7 @@ class DashboardController extends Controller
     public function index(){
 
        $total_sale =  Order::where('status', 'Delivered')->sum('total');
-        $total_orders = Order::count();
+        $total_orders = Order::where('status', 'Delivered')->count();
         $total_products = Product::count();
 
         return response([
