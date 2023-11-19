@@ -4,12 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    public function index(){
+        $data = User::all();
+
+        return response([
+            'data' => $data,
+            'message' => "View all the Records"
+        ],200);
+    }
+
     public function register(Request $request ){
         $fields = $request->validate([
             'username'=>'required|string|unique:users,username',

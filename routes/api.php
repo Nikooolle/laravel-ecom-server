@@ -66,5 +66,7 @@ Route::group(['middleware' => ['auth:sanctum', 'role:admin']], function(){
     Route::delete("/concerns/{id}", [ConcernController::class, 'destroy']);
 
     Route::get("/dashboard", [DashboardController::class, 'index']); //Dashboard
+
+    Route::get("/users", [AuthController::class, 'index']); //all users
 });
 
