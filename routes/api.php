@@ -28,7 +28,7 @@ Route::get("/products/{id}", [ProductController::class, 'show']);
 Route::get("/products/search/{name}", [ProductController::class, 'search']);
 Route:: post("/register", [AuthController::class, 'register']);
 Route:: post("/login", [AuthController::class, 'login']);
-Route::get("/category", [CategoryController::class, 'index']); //all record
+Route::get("/category", [CategoryController::class, 'index']); //all category
 Route::get("/concerns", [ConcernController::class, 'index']); //all record
 
 Route::group(['middleware' => ['auth:sanctum']], function(){
@@ -48,16 +48,15 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
 //Admin Routes
 //Protected routes
 Route::group(['middleware' => ['auth:sanctum', 'role:admin']], function(){
+    Route::get("/all_products", [ProductController::class,'allProduct']);
     Route::post("/products", [ProductController::class, 'store']);
     Route::put("/products/{id}", [ProductController::class, 'update']);
     Route::delete("/products/{id}", [ProductController::class, 'destroy']);
 
-    Route::get("/all_orders", [OrderController::class, 'allOrder']); //all record
-
-    Route::post("/category", [CategoryController::class, 'store']);
-    Route::get("/category/{id}", [CategoryController::class, 'show']); //specific record
-    Route::put("/category/{id}", [CategoryController::class, 'update']);
-    Route::delete("/category/{id}", [CategoryController::class, 'destroy']);
+    Route::post("/category", [CategoryController::class, 'store']); //create category
+    Route::get("/category/{id}", [CategoryController::class, 'show']); //specific category
+    Route::put("/category/{id}", [CategoryController::class, 'update']); //update category
+    Route::delete("/category/{id}", [CategoryController::class, 'destroy']); //delete category
 
     Route::post("/concerns", [ConcernController::class, 'store']);
     Route::get("/concerns/{id}", [ConcernController::class, 'show']); //specific record

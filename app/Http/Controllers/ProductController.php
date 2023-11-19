@@ -29,6 +29,7 @@ class ProductController extends Controller
         ]);
     }
 
+
     public function show($id){
         $data = Product::with('category')->find($id);
         if(!$data) {
@@ -69,7 +70,7 @@ class ProductController extends Controller
         return response([
             'data' => $data,
             'message' => "Successfully created Product"
-        ]);
+        ], 202);
     }
 
     public function update(Request $request, $id){
@@ -84,7 +85,8 @@ class ProductController extends Controller
             'price' => ['required', 'numeric'],
             'quantity' => ['required', 'numeric'],
             'image' => ['required','string'],
-            'category_id' => ['required']
+            'category_id' => ['required'],
+            'concern_id' => ['required']
         ]);
 
 
@@ -94,13 +96,14 @@ class ProductController extends Controller
             'price' => $request->price,
             'quantity' => $request->quantity,
             'image' => $request->image,
-            'category_id' => $request->category_id
+            'category_id' => $request->category_id,
+            'concern_id' => $request->concern_id
         ]);
 
         return response([
             'data' => $data,
             'message' => "Record Updated Successfully",
-        ]);
+        ], 202);
 
     }
 
